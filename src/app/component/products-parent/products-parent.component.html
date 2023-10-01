@@ -1,0 +1,36 @@
+<!-- ####################day4####################### -->
+<!-- <p>Hello From parent component</p> -->
+<div class="row">
+  <div class="col-md-2">Filter by:</div>
+  <div class="col-md-10">
+    <input type="text" class="form-control" [(ngModel)]="listFilter" />
+  </div>
+  <div class="col-md-12">
+    <!-- <h3>Filter Value:{{ user }}</h3> -->
+    <h3>Filter Value:{{ listFilter }}</h3>
+  </div>
+</div>
+<app-products-list
+  [listFilterInChild]="listFilter"
+  (newPrdInCartEvent)="func1($event)"
+>
+</app-products-list>
+<!--  -->
+<caption>
+  Cart in parent
+</caption>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of cart">
+      <td scope="row">{{ item.name }}</td>
+      <td scope="row">{{ item.price | currency }}</td>
+    </tr>
+  </tbody>
+</table>

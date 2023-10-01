@@ -1,0 +1,129 @@
+<!-- <form #Form="ngForm">
+  <div class="form-group row mb-2">
+    <label for="name" class="col-form-form-label">Name</label>
+    <div class="col-md-8">
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        placeholder="Name"
+        required
+        minlength="3"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <label for="price" class="col-form-form-label">Price</label>
+    <div class="col-md-8">
+      <input
+        type="text"
+        class="form-control"
+        id="price"
+        name="price"
+        placeholder="price"
+        required
+      />
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <label for="quantity" class="col-form-form-label">Quantity</label>
+    <div class="col-md-8">
+      <input
+        type="text"
+        class="form-control"
+        id="quantity"
+        name="quantity"
+        placeholder="quantity"
+        required
+      />
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success" [disabled]="Form.invalid">
+    Submit
+  </button>
+</form> -->
+<div class="card m-3">
+  <div class="card-header">Sign Up with reactive</div>
+  <div class="card-body">
+    <!-- <form (ngSubmit)="addUser()" #Form="ngForm"> -->
+    <form [formGroup]="userForm">
+      <div class="form-group row mb-2">
+        <label for="firstName" class="col-form-form-label">First Name</label>
+        <div class="col-md-8">
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            name="firstName"
+            placeholder="First Name (required)"
+            required
+            minlength="3"
+            formControlName="firstName"
+            [ngClass]="{
+              'is-invalid':
+                userForm.get('firstName')?.touched ||
+                (userForm.get('firstName')?.dirty &&
+                  userForm.get('firstName')?.invalid)
+            }"
+          />
+          <!-- <input
+              type="text"
+              class="form-control"
+              id="firstName"
+              name="firstName"
+              placeholder="First Name (required)"
+              required
+              minlength="3"
+              formControlName="firstName"
+              [ngClass]="{
+                'is-invalid':
+                  (firstName?.touched || firstName?.dirty) && firstName?.invalid
+              }"
+            /> -->
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label for="lastName" class="col-form-form-label">Last Name</label>
+        <div class="col-md-8">
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            name="lastName"
+            placeholder="Last Name (required)"
+            required
+            minlength="3"
+            pattern="[A-Za-z]{5,}"
+            formControlName="lastName"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label for="email" class="col-form-form-label">Email</label>
+        <div class="col-md-8">
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="email (required)"
+            required
+            minlength="3"
+            email
+            formControlName="email"
+          />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+      <!-- <button type="submit" class="btn btn-success" [hidden]="Form.invalid">
+            Submit
+          </button> -->
+    </form>
+  </div>
+</div>
+<h3>{{ userForm.value | json }}</h3>

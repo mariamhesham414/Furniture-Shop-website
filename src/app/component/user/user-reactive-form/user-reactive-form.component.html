@@ -1,0 +1,91 @@
+<div class="card m-3">
+  <div class="card-header">Sign Up with reactive</div>
+  <div class="card-body">
+    <form [formGroup]="userForm">
+      <div class="form-group row mb-2">
+        <label for="firstName" class="col-form-form-label">First Name</label>
+        <div class="col-md-8">
+          <!-- <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            name="firstName"
+            placeholder="First Name (required)"
+            required
+            minlength="3"
+            formControlName="firstName"
+            [ngClass]="{
+              'is-invalid':
+                (userForm.get('firstName')?.touched ||
+                  userForm.get('firstName')?.dirty) &&
+                userForm.get('firstName')?.invalid
+            }"
+          /> -->
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            name="firstName"
+            placeholder="First Name (required)"
+            required
+            minlength="3"
+            formControlName="firstName"
+            [ngClass]="{
+              'is-invalid':
+                (firstName?.touched || firstName?.dirty) && firstName?.invalid
+            }"
+          />
+          <span class="invalid-feedback">
+            <!-- <span class="alert alert-danger"> -->
+            <span *ngIf="firstName?.errors?.['required']"
+              >First Name required</span
+            >
+            <span *ngIf="firstName?.errors?.['minlength']"
+              >First Name must be at least 3 characters</span
+            ></span
+          >
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label for="lastName" class="col-form-form-label">Last Name</label>
+        <div class="col-md-8">
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            name="lastName"
+            placeholder="Last Name (required)"
+            required
+            minlength="3"
+            pattern="[A-Za-z]{5,}"
+            formControlName="lastName"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label for="email" class="col-form-form-label">Email</label>
+        <div class="col-md-8">
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="email (required)"
+            required
+            minlength="3"
+            email
+            formControlName="email"
+          />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+      <!-- <button type="submit" class="btn btn-success" [hidden]="Form.invalid">
+          Submit
+        </button> -->
+    </form>
+  </div>
+</div>
+<!-- <h3>{{ userForm.value | json }}</h3> -->
+<!-- <h3>{{ userForm.errors | json }}</h3> -->

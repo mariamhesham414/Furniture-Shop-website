@@ -1,0 +1,31 @@
+<!-- <p>main works!</p> -->
+<!-- data binding -->
+<!-- interpolation => access from component in component html -->
+
+<!-- <h2>{{ title }}</h2> -->
+
+<h3>{{ track.trackName }}</h3>
+<!-- <img src="{{ track.trackImg }}" width="300" /> -->
+<img [src]="track.trackImg" width="300" />
+
+<!-- <h2>{{ track.trackCourse }}</h2> -->
+<!-- <h2>{{ track.trackCourse[2] }}</h2> -->
+
+<!-- <ul>
+    <li>{{track.trackCourse[0]}}</li>
+    <li>{{track.trackCourse[1]}}</li>
+    <li>{{track.trackCourse[2]}}</li>
+</ul> -->
+
+<!-- *ngFor => for of -->
+<ul>
+  <li *ngFor="let item of track.trackCourse">{{ item }}</li>
+</ul>
+
+<!-- day2 -->
+
+<p>for test model interface</p>
+
+<h1>{{ trackInterface.trackName }}</h1>
+<h2>{{ trackInterface.trackNum }}</h2>
+<h3 *ngFor="let course of trackInterface.courses">{{ course }}</h3>

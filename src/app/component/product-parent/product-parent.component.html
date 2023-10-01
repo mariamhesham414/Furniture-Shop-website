@@ -1,0 +1,54 @@
+<p>product-parent works!</p>
+<div class="row">
+  <div class="col-md-2">Filter by:</div>
+  <div class="col-md-10">
+    <input type="text" class="form-control" [(ngModel)]="listFilter" />
+  </div>
+  <div class="col-md-12">
+    <h3>Filter Value:{{ listFilter }}</h3>
+  </div>
+</div>
+<!-- <div>
+  <label for="category"><h4>Filter:</h4></label>
+  <select name="category" id="category" [(ngModel)]="listFilter">
+    <option value="0">Choose</option>
+    <option *ngFor="let item of cart" [value]="item.price">
+      Price: {{ item.price }}
+    </option>
+  </select>
+</div> -->
+<app-products [listFilterInChild]="listFilter"></app-products>
+
+<caption>
+  Cart in parent
+</caption>
+<table class="table table-danger table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Count</th>
+      <th scope="col">Total</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of cart">
+      <td scope="row">{{ item.name }}</td>
+      <td scope="row">{{ item.price | currency }}</td>
+      <td scope="row">{{ item.count }}</td>
+      <td scope="row">{{ numOfItems(item.count, item.price) | currency }}</td>
+      <td scope="row"><button>Delete</button></td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr *ngFor="let item of cart">
+      <td scope="row"></td>
+      <td scope="row"></td>
+      <td scope="row"></td>
+      <td scope="row"></td>
+      <td scope="row">{{ total }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <h3>
+        <ng-container [ngSwitch]="product?.quantity">
+          <ng-container *ngSwitchCase="0"
+            ><h3 class="text-danger">Out of stock</h3></ng-container
+          >
+          <ng-container *ngSwitchCase="1">Last one item</ng-container>
+          <ng-container *ngSwitchCase="2">Last 2 item!</ng-container>
+          <ng-container *ngSwitchCase="3">Last 3 item</ng-container>
+          <ng-container *ngSwitchDefault>In stock</ng-container>
+        </ng-container>
+      </h3>
+      <img [src]="product?.prdImgURL" class="img-fluid w-75 rounded" />
+    </div>
+    <div class="col-md-6 p-5">
+      <h1>Product Details</h1>
+      <h3>Name: {{ product?.name }}</h3>
+      <h4 style="color: lightgray">{{ product?.details }}</h4>
+      <h3>Price: {{ product?.price | currency }}</h3>
+      <h3>Material: {{ product?.Material }}</h3>
+    </div>
+  </div>
+</div>
+<!-- <button class="button-33" (click)="goBackToPrds()">Back</button> -->
+<button class="button-33" [routerLink]="['/productParent']">Back</button>
+<div
+  class="d-flex justify-content-center"
+  role="group"
+  aria-label="Basic example"
+>
+  <button
+    class="border-0"
+    (click)="perviousProduct()"
+    [disabled]="prdId == productsIdsList[0]"
+  >
+    <i class="fa-solid fa-angles-left fs-4"></i></button
+  ><button
+    class="border-0"
+    (click)="nextProduct()"
+    [disabled]="prdId == productsIdsList[productsIdsList.length - 1]"
+  >
+    <i class="fa-solid fa-angles-right fs-4"></i>
+  </button>
+</div>

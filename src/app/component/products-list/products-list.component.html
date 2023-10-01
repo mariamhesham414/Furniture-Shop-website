@@ -1,0 +1,133 @@
+<!-- Day3 -->
+<!-- date pipe -->
+<!-- <h2>{{ date1 | date : "shortDate" }}</h2> -->
+<h2>{{ date1 | date : "fullDate" }}</h2>
+<!-- ########################### -->
+
+<!-- event binding -->
+
+<button class="btn btn-primary" (click)="toggleImage()">Image</button>
+
+<!-- ###########################day4############################ -->
+<!-- two way binding -->
+<!-- <div class="row">
+  <div class="col-md-2">Filter by:</div>
+  <div class="col-md-10"> -->
+<!-- <input type="text" class="form-control" [value]="user" /> -->
+<!-- <input type="text" class="form-control" [(ngModel)]="user" /> -->
+<!-- <input type="text" class="form-control" [(ngModel)]="listFilter" />
+  </div>
+  <div class="col-md-12"> -->
+<!-- <h3>Filter Value:{{ user }}</h3> -->
+<!-- <h3>Filter Value:{{ listFilter }}</h3>
+  </div>
+</div> -->
+<!-- ########################### -->
+<div class="row">
+  <!-- class binding -->
+  <!-- <div
+    class="col-sm-4 mb-3"
+    *ngFor="let item of productsList"
+    [class.text-danger]="item.price > 2000"
+    [class.bg-warning]="item.price > 2000"
+  > -->
+  <!-- style binding -->
+  <!-- style => ternary operator -->
+  <!-- <div
+    class="col-sm-4 mb-3"
+    *ngFor="let item of productsList"
+    [style.color]="item.price > 2000 ? 'red' : 'blue'"
+    [style.background-color]="(item.price > 2000) && 'lightred'"
+  > --><!-- && => if we don't want add other option internary operator  -->
+  <!-- <div
+    class="col-sm-4 mb-3"
+    *ngFor="let item of productsList"
+    [style.color]="item.price > 2000 ? 'red' : 'blue'"
+    [style.background-color]="item.price > 2000 ? 'lightred' : 'lightblue'"
+  > -->
+  <!-- day3 -->
+  <!-- <div
+    class="col-sm-4 mb-3"
+    *ngFor="let item of filteredProducts"
+    [style.color]="item.price > 2000 ? 'red' : 'blue'"
+    [style.background-color]="item.price > 2000 ? 'lightred' : 'lightblue'"
+  > -->
+  <!-- virtual containers => ng-container && ng-template && ng-content -->
+  <!-- <ng-container *ngFor="let item of filteredProducts">
+    <div class="col-sm-4" *ngIf="item.price > 2000"> -->
+  <ng-container *ngFor="let item of filteredProducts">
+    <!-- #######day5########## -->
+    <!-- <div class="col-sm-4" (click)="prdDetails(item.id)"> -->
+    <!-- or -->
+    <div class="col-sm-4" [routerLink]="['/prdListDetails', item.id]">
+      <!-- <ng-container *ngIf="item.price > 2000">
+    <div class="col-sm-4" *ngFor="let item of filteredProducts"> error-->
+      <!-- <div
+  class="col-sm-4 mb-3"
+  *ngFor="let item of filteredProducts"
+  *ngIf="item.price>10000"
+ >error -->
+      <!-- <div
+  class="col-sm-4 mb-3"
+  *ngFor="let item of filteredProducts"
+  [ngClass]="{'text-warning':item.price>2000,'bg-danger':item.price>2000}"
+  
+> -->
+      <!-- <div
+class="col-sm-4 mb-3"
+*ngFor="let item of filteredProducts"
+[ngStyle]="{'color':(item.price>2000)?'red':'blue','background-color':(item.price>2000)?'lightgray':'lightblue'}"> -->
+      <img
+        [src]="item.prdImgURL"
+        class="img-fluid"
+        *ngIf="showImage"
+        ImgStyle="5px"
+        radius1="20px"
+      />
+      <!-- <h4>{{ item.name }}</h4> -->
+      <h4>{{ item.name | uppercase }}</h4>
+      <!-- <h4>{{ item.name|lowercase }}</h4> -->
+      <!-- <h6>{{ item.price }}</h6> -->
+      <!-- <h6>{{ item.price | currency : "EGP" : "code" }}</h6> -->
+      <!-- <h6>{{ item.price | currency : "EGP" : "symbol" }}</h6> -->
+      <!-- <h6>{{ item.price | currency : "USD" : "code" }}</h6> -->
+      <!-- <h6>{{ item.price | currency : "USD" : "symbol" }}</h6> -->
+      <h6 class="text-decoration-line-through">{{ item.price | currency }}</h6>
+      <!-- <h6>{{ item.price | calcDiscount | currency }}</h6> -->
+      <h6>{{ item.price | calcDiscount : 25 | currency }}</h6>
+      <div>
+        <ng-container [ngSwitch]="item.categoryID">
+          <ng-container *ngSwitchCase="1">Table</ng-container>
+          <ng-container *ngSwitchCase="2">Chair</ng-container>
+          <ng-container *ngSwitchCase="3">Tv Unit</ng-container>
+        </ng-container>
+      </div>
+
+      <div>
+        <ng-container *ngIf="item.quantity > 0; else outOfStockTemplate">
+          <h5>In Stock</h5>
+        </ng-container>
+        <!-- template refrence => #name -->
+        <ng-template #outOfStockTemplate>
+          <h5 class="text-danger">Out Of Stock</h5>
+        </ng-template>
+      </div>
+
+      <button
+        class="btn btn-danger"
+        (click)="addToCart(item)"
+        [disabled]="item.quantity == 0"
+      >
+        Add ToCart
+        <i class="fa-sharp fa-solid fa-cart-plus modifyIcon"></i>
+      </button>
+      <!-- or -->
+      <!-- <button class="btn btn-danger" [disabled]="!item.quantity">
+        Add ToCart
+        <i class="fa-sharp fa-solid fa-cart-plus modifyIcon"></i>
+      </button> -->
+    </div>
+  </ng-container>
+</div>
+<!-- </div> -->
+<!-- </div> -->

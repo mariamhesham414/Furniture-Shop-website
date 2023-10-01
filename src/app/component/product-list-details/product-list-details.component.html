@@ -1,0 +1,83 @@
+<!-- Day6 -->
+<div class="col-md-5 mx-auto">
+  <div class="small fw-light">Search with material</div>
+  <div class="input-group">
+    <input
+      class="form-control border-end-0 border rounded-pill"
+      type="text"
+      id="example-search-input"
+      #searchVal
+    />
+    <span class="input-group-append">
+      <button
+        class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5"
+        type="button"
+        (click)="searchWithMaterial(searchVal.value)"
+      >
+        <i class="fa fa-search"></i>
+      </button>
+    </span>
+  </div>
+</div>
+<ul>
+  <li *ngFor="let prd of prdsAfterSearch">{{ prd.name }}</li>
+</ul>
+<!-- Day6 -->
+<div class="container">
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <h3>
+        <ng-container [ngSwitch]="product?.quantity">
+          <ng-container *ngSwitchCase="0"
+            ><h3 class="text-danger">Out of stock</h3></ng-container
+          >
+          <ng-container *ngSwitchCase="1">Last one item</ng-container>
+          <ng-container *ngSwitchCase="2">Last 2 item!</ng-container>
+          <ng-container *ngSwitchCase="3">Last 3 item</ng-container>
+          <ng-container *ngSwitchDefault>In stock</ng-container>
+        </ng-container>
+      </h3>
+      <img [src]="product?.prdImgURL" class="img-fluid" />
+    </div>
+    <div class="col-md-6">
+      <h2>Product Details</h2>
+      <h3>{{ product?.name }}</h3>
+      <h3 style="color: gray">{{ product?.details }}</h3>
+      <h3>Price: {{ product?.price | currency }}</h3>
+      <h3>Material: {{ product?.Material }}</h3>
+    </div>
+  </div>
+</div>
+<!-- <button class="button-91" (click)="goBackToPrds()">Back</button> -->
+<button class="button-91" [routerLink]="['/products']">Back</button>
+<div
+  class="d-flex justify-content-center"
+  role="group"
+  aria-label="Basic example"
+>
+  <button
+    class="border-0"
+    (click)="perviousPrd()"
+    [disabled]="prdId == productsIdsList[0]"
+  >
+    <i class="fa-solid fa-angles-left fs-4 text-primary"></i></button
+  ><button
+    class="border-0"
+    (click)="nextPrd()"
+    [disabled]="prdId == productsIdsList[productsIdsList.length - 1]"
+  >
+    <i class="fa-solid fa-angles-right fs-4"></i>
+  </button>
+</div>
+<!-- or -->
+<!-- <div class="container">
+  <div class="row" *ngIf="product">
+    <div class="col-md-6"><img [src]="product.prdImgURL" width="400" /></div>
+    <div class="col-md-6">
+      <h2>Product Details</h2>
+      <h3>{{ product.name }}</h3>
+    </div>
+  </div>
+</div> -->
+<button class="btn btn-success" (click)="editPrd()">Edit Product</button>
+<button class="btn btn-danger" (click)="deletePrd()">Delete Product</button>

@@ -1,0 +1,81 @@
+<button class="custom-button mb-5 ms-5" (click)="addNewPrdStatic()">
+  Add New product
+</button>
+
+<form (ngSubmit)="addNewDinaPrd()" #Form="ngForm">
+  <!-- <form (submit)="addNewDinaPrd($event)" #prdForm="ngForm"> -->
+  <div class="form-group row mb-2">
+    <label for="name" class="col-form-form-label">Name</label>
+    <div class="col-md-8">
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        placeholder="Name"
+        required
+        minlength="3"
+        [(ngModel)]="newProduct.name"
+        #nameInput="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (nameInput.touched || nameInput.dirty) && nameInput.invalid
+        }"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="nameInput.errors?.['required']"
+          >please enter your name</span
+        >
+        <span *ngIf="nameInput.errors?.['minlength']"
+          >name must be at least 3 characters</span
+        >
+      </span>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <label for="price" class="col-form-form-label">Price</label>
+    <div class="col-md-8">
+      <input
+        type="text"
+        class="form-control"
+        id="price"
+        name="price"
+        placeholder="price"
+        required
+        [(ngModel)]="newProduct.price"
+        #priceInput="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (priceInput.touched || priceInput.dirty) && priceInput.invalid
+        }"
+      />
+      <span class="invalid-feedback">
+        <span *ngIf="priceInput.errors?.['required']">please enter price</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="form-group row mb-2">
+    <label for="quantity" class="col-form-form-label">Quantity</label>
+    <div class="col-md-8">
+      <input
+        type="text"
+        class="form-control"
+        id="quantity"
+        name="quantity"
+        placeholder="quantity"
+        required
+        [(ngModel)]="newProduct.quantity"
+      />
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success" [disabled]="Form.invalid">
+    Submit
+  </button>
+</form>
+<!-- <h3>{{ nameInput.value | json }}</h3> -->
+<!-- <h3>{{ nameInput.dirty | json }}</h3>
+<h3>{{ nameInput.touched | json }}</h3> -->
+<!-- <h3>{{ nameInput.className | json }}</h3> -->
+<h3>{{ nameInput.errors | json }}</h3>
